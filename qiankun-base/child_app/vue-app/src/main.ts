@@ -1,15 +1,18 @@
 import {createApp} from 'vue';
 import './style.css';
 import App from './App.vue';
+import router from './router';
+import ElementPlus from 'element-plus';
+import 'element-plus/dist/index.css';
 import {renderWithQiankun, qiankunWindow} from 'vite-plugin-qiankun/dist/helper';
 
 let app: any;
 if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
-  createApp(App).mount('#app');
+  createApp(App).use(router).use(ElementPlus).mount('#app');
 } else {
   renderWithQiankun({
     mount(props) {
-      app = createApp(App);
+      app = createApp(App).use(router).use(ElementPlus);
       app.mount(props.container?.querySelector('#app'));
     },
     bootstrap() {

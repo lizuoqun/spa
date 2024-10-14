@@ -22,6 +22,7 @@ const QIANKUN_APPS = [
 const QIANKUN_LIFECYCLE = {
   beforeLoad: [async (app: any) => {
     console.log('before load =====', app.name);
+    
   }],
   beforeMount: [async (app: any) => {
     console.log('before mount =====', app.name);
