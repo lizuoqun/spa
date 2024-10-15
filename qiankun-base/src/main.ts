@@ -1,7 +1,7 @@
 import {createApp} from 'vue';
 import './style.css';
 import App from './App.vue';
-import {registerMicroApps, start} from 'qiankun';
+import {registerMicroApps, start, initGlobalState} from 'qiankun';
 
 // 注册的所有子应用
 const QIANKUN_APPS = [
@@ -22,7 +22,7 @@ const QIANKUN_APPS = [
 const QIANKUN_LIFECYCLE = {
   beforeLoad: [async (app: any) => {
     console.log('before load =====', app.name);
-    
+
   }],
   beforeMount: [async (app: any) => {
     console.log('before mount =====', app.name);
@@ -34,4 +34,16 @@ const QIANKUN_LIFECYCLE = {
 registerMicroApps(QIANKUN_APPS, QIANKUN_LIFECYCLE);
 
 start();
+
+// 全局状态管理
+const state = {count: 1};
+
+const action = initGlobalState(state);
+
+action.onGlobalStateChange((value, prev) => {
+  console.log('main app change', value, prev);
+});
+
+action.setGlobalState(state);
+
 createApp(App).mount('#app');

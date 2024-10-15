@@ -14,6 +14,9 @@ if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
     mount(props) {
       app = createApp(App).use(router).use(ElementPlus);
       app.mount(props.container?.querySelector('#app'));
+      console.log('vue app mount get props', props);
+      props.onGlobalStateChange((state: any, prev: any) => console.log(`[onGlobalStateChange - ${props.name}]:`, state, prev));
+      props.setGlobalState({count: 100});
     },
     bootstrap() {
       console.log('vue app bootstrap');

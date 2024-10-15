@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {ref} from 'vue';
 import router from '@/router/index';
+import axios from 'axios';
 
 const activeName = ref('list');
 
@@ -12,6 +13,12 @@ const handleClick = (tab: any) => {
     router.push({name: tab.paneName});
   }
 };
+
+const sendRequest = () => {
+  axios.get('/api/test').then((res) => {
+    console.log(res);
+  });
+};
 </script>
 
 <template>
@@ -22,4 +29,6 @@ const handleClick = (tab: any) => {
     <el-tab-pane label="Go React" name="react-app"></el-tab-pane>
   </el-tabs>
   <router-view/>
+  <hr/>
+  <el-button @click="sendRequest">发个请求</el-button>
 </template>
