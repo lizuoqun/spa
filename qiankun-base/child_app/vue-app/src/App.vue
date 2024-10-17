@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import {ref} from 'vue';
+import {onMounted, ref} from 'vue';
+// @ts-ignore
 import router from '@/router/index';
 import axios from 'axios';
+// @ts-ignore
+import actions from '@/action.js';
 
 const activeName = ref('list');
 
@@ -19,6 +22,14 @@ const sendRequest = () => {
     console.log(res);
   });
 };
+
+onMounted(() => {
+  actions.onGlobalStateChange((state: any) => {
+    console.log('我是子应用，我检测到数据了：', state);
+  }, true);
+
+  console.log('vue page onmoued ==-===', actions)
+});
 </script>
 
 <template>

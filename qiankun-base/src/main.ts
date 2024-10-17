@@ -44,6 +44,8 @@ action.onGlobalStateChange((value, prev) => {
   console.log('main app change', value, prev);
 });
 
-action.setGlobalState(state);
+setTimeout(() => {
+  action.setGlobalState(state);
+}, 5000);
 
 createApp(App).mount('#app');
